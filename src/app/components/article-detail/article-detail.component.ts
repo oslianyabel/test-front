@@ -22,6 +22,10 @@ export class ArticleDetailComponent implements OnInit {
   articleService = inject(ArticleService);
   rating!: number;
   stars!: string[];
+  reviews = false;
+  description = false;
+  details = false;
+  care = false;
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -50,4 +54,21 @@ export class ArticleDetailComponent implements OnInit {
     }
     return stars;
   }
+
+  toggleReviews() {
+    this.reviews =!this.reviews;
+  }
+
+  toggleDescription() {
+    this.description =!this.description;
+  }
+
+  toggleDetails() {
+    this.details =!this.details;
+  }
+
+  toggleCare() {
+    this.care =!this.care;
+  }
+
 }
