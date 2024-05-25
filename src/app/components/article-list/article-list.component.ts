@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { articulo } from '../../types/article.type';
 import { ArticleService } from '../../services/article.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { FiltrosComponent } from './filtros/filtros.component';
 
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [FiltrosComponent],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.css',
 })
@@ -41,10 +41,6 @@ export class ArticleListComponent implements OnInit {
       const precioB = parseFloat(b.Price);
       return precioA - precioB;
     });
-  }
-
-  show_aside() {
-    this.aside = !this.aside;
   }
 
 }

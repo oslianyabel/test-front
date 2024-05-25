@@ -1,0 +1,73 @@
+<ul class="list-none mb-4">
+  <li class="mb-2">
+    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="price = !price">
+      <p>Price</p>
+      <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
+        <path d="M7 10L12 15L17 10Z" fill="#666" />
+      </svg>
+    </div>
+
+    @if (price) {
+    <ul class="list-none pl-4 mb-4">
+      <li><a class="text-gray-600 hover:text-gray-900">Highest to lowest</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900">Minor to Major</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900">Menos de $10</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900">$10-$20</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900">$20-$50</a></li>
+    </ul>
+    }
+  </li>
+
+  <li class="mb-2">
+    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="category = !category">
+        <a>Category</a>
+        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
+            <path d="M7 10L12 15L17 10Z" fill="#666" />
+        </svg>
+    </div>
+
+    @if (category) {
+        <ul class="list-none pl-4 mb-4">
+          <li class="text-gray-600 hover:text-gray-900">Women's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900">Men's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900">Infant & Toddler Originals</li>
+          <li class="text-gray-600 hover:text-gray-900">Originals</li>
+          <li class="text-gray-600 hover:text-gray-900">Youth's Originals</li>
+        </ul>
+    }
+  </li>
+
+  <li class="mb-2">
+    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="promo = !promo">
+        <a>Promo</a>
+        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
+            <path d="M7 10L12 15L17 10Z" fill="#666" />
+        </svg>
+    </div>
+
+    @if (promo) {
+        <ul class="list-none pl-4 mb-4">
+            <li><a class="text-gray-600 hover:text-gray-900 text-sm">save 30% with code REFRESH</a></li>
+            <li><a class="text-gray-600 hover:text-gray-900">None</a></li>
+        </ul>
+    }
+  </li>
+
+  <li class="mb-2">
+    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="reviews = !reviews">
+        <a>Reviews</a>
+        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
+            <path d="M7 10L12 15L17 10Z" fill="#666" />
+        </svg>
+    </div>
+
+    @if (reviews) {
+        <ul class="list-none pl-4 mb-4">
+            <li><a class="text-gray-600 hover:text-gray-900">5 estrellas</a></li>
+            <li><a class="text-gray-600 hover:text-gray-900">4 estrellas</a></li>
+            <li><a class="text-gray-600 hover:text-gray-900">3 estrellas</a></li>
+        </ul>
+    }
+  </li>
+
+</ul>

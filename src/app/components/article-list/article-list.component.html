@@ -2,7 +2,7 @@
 
   <div class="flex justify-between mb-2">
     <h2 class="text-sm md:text-2xl font-bold mb-4">All Products ({{ articulos.length }})</h2>
-    <button class="filtro" (click)="show_aside()">
+    <button class="filtro" (click)="aside = !aside">
       Filter & Sort
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline">
         <rect x="2" y="4" width="4" height="4" rx="1" fill="#fff" />
@@ -16,49 +16,18 @@
 
 @if (aside) {
   <aside class="fixed top-10 right-0 w-64 h-screen bg-white shadow-md p-4 z-10">
-    <h2 class="text-lg font-bold mb-4">Filter & Sort</h2>
-    <ul class="list-none mb-4">
-      <li class="mb-2">
-        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Sort by</a>
-        <ul class="list-none pl-4 mb-4">
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Precio: más bajo</a></li>
-        </ul>
-      </li>
-      <li class="mb-2">
-        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Product type</a>
-        <ul class="list-none pl-4 mb-4">
-          <!-- agregar más categorías aquí -->
-        </ul>
-      </li>
-      <li class="mb-2">
-        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Color</a>
-        <ul class="list-none pl-4 mb-4">
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Rojo</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Azul</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Verde</a></li>
-          <!-- agregar más colores aquí -->
-        </ul>
-      </li>
-      <li class="mb-2">
-        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Price</a>
-        <ul class="list-none pl-4 mb-4">
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Menos de $10</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >$10-$20</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >$20-$50</a></li>
-          <!-- agregar más rangos de precio aquí -->
-        </ul>
-      </li>
-      <li class="mb-2">
-        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Reviews</a>
-        <ul class="list-none pl-4 mb-4">
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >5 estrellas</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >4 estrellas</a></li>
-          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >3 estrellas</a></li>
-          <!-- agregar más opciones de calificación aquí -->
-        </ul>
-      </li>
-    </ul>
+    <div class="flex text-lg font-bold mb-4 justify-between">
+      <h2>Filter & Sort</h2>
+      <svg class="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      (click)="aside = !aside">
+        <path d="M18 6L6 18M6 6L18 18" />
+      </svg>
+    </div>
+
+    <app-filtros></app-filtros>
+
   </aside>
+
 }
   
   <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
