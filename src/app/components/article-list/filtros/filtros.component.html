@@ -1,4 +1,4 @@
-<ul class="list-none mb-4">
+<ul class="list-none mb-4 cursor-pointer">
   <li class="mb-2">
     <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="price = !price">
       <p>Price</p>
@@ -28,11 +28,12 @@
 
     @if (category) {
         <ul class="list-none pl-4 mb-4">
-          <li class="text-gray-600 hover:text-gray-900">Women's Originals</li>
-          <li class="text-gray-600 hover:text-gray-900">Men's Originals</li>
-          <li class="text-gray-600 hover:text-gray-900">Infant & Toddler Originals</li>
-          <li class="text-gray-600 hover:text-gray-900">Originals</li>
-          <li class="text-gray-600 hover:text-gray-900">Youth's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('all')">All</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Women\'s Originals')">Women's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Men\'s Originals')">Men's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Infant & Toddler Originals')">Infant & Toddler Originals</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Originals')">Originals</li>
+          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Youth Originals')">Youth Originals</li>
         </ul>
     }
   </li>

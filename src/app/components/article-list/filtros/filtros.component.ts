@@ -13,10 +13,9 @@ export class FiltrosComponent {
   promo = false;
   reviews = false;
 
-  @Output() close_emitter = new EventEmitter();
-
-  close() {
-    this.close_emitter.emit("cerrar");
-  }
+  @Output() price_emitter = new EventEmitter<string>();
+  @Output() category_emitter = new EventEmitter<string>();
+  @Output() promo_emitter = new EventEmitter<string>();
+  @Output() reviews_emitter = new EventEmitter<string>();
 
 }

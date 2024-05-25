@@ -13,6 +13,7 @@ import { FiltrosComponent } from './filtros/filtros.component';
 })
 export class ArticleListComponent implements OnInit {
   articulos!: articulo[];
+  articulos_copy!: articulo[];
   articleService = inject(ArticleService);
   imagen_hover: boolean[] = new Array(445).fill(false);
   url: string[] = new Array(445).fill("");
@@ -23,6 +24,7 @@ export class ArticleListComponent implements OnInit {
     this.articleService.getProducts().subscribe({
       next: (data) => {
         this.articulos = data;
+        this.articulos_copy = data;
         for (let i = 1; i < this.articulos.length; i++) {
           this.url[i] = this.articulos[i].Image;
         }
@@ -41,6 +43,12 @@ export class ArticleListComponent implements OnInit {
       const precioB = parseFloat(b.Price);
       return precioA - precioB;
     });
+  }
+
+  category_filter(user_selection: string) {
+    this.articulos = this.articulos_copy;
+    if(user_selection != 'all')
+      this.articulos = this.articulos.filter(articulo => articulo.Category == user_selection);
   }
 
 }
