@@ -1,3 +1,7 @@
 .articulo {
     @apply bg-white rounded hover:border hover:border-black pb-10 overflow-hidden;
 }
+
+.filtro {
+    @apply text-black bg-white px-1 md:px-3 border border-black font-bold text-xs md:text-sm hover:text-gray-600
+}

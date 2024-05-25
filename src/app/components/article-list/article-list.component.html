@@ -1,8 +1,8 @@
-<section class="container mx-auto p-8">
+<section class="container mx-auto p-2 md:p-8">
 
-  <div class="flex justify-between">
-    <h2 class="text-2xl font-bold mb-4">All Products ({{ articulos.length }})</h2>
-    <button class="text-black bg-white px-3 border border-black font-bold text-sm hover:text-gray-600">
+  <div class="flex justify-between mb-2">
+    <h2 class="text-sm md:text-2xl font-bold mb-4">All Products ({{ articulos.length }})</h2>
+    <button class="filtro" (click)="show_aside()">
       Filter & Sort
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline">
         <rect x="2" y="4" width="4" height="4" rx="1" fill="#fff" />
@@ -13,13 +13,64 @@
       </svg>
     </button>
   </div>
+
+@if (aside) {
+  <aside class="fixed top-10 right-0 w-64 h-screen bg-white shadow-md p-4 z-10">
+    <h2 class="text-lg font-bold mb-4">Filter & Sort</h2>
+    <ul class="list-none mb-4">
+      <li class="mb-2">
+        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Sort by</a>
+        <ul class="list-none pl-4 mb-4">
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Precio: más bajo</a></li>
+        </ul>
+      </li>
+      <li class="mb-2">
+        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Product type</a>
+        <ul class="list-none pl-4 mb-4">
+          <!-- agregar más categorías aquí -->
+        </ul>
+      </li>
+      <li class="mb-2">
+        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Color</a>
+        <ul class="list-none pl-4 mb-4">
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Rojo</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Azul</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out">Verde</a></li>
+          <!-- agregar más colores aquí -->
+        </ul>
+      </li>
+      <li class="mb-2">
+        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Price</a>
+        <ul class="list-none pl-4 mb-4">
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Menos de $10</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >$10-$20</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >$20-$50</a></li>
+          <!-- agregar más rangos de precio aquí -->
+        </ul>
+      </li>
+      <li class="mb-2">
+        <a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >Reviews</a>
+        <ul class="list-none pl-4 mb-4">
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >5 estrellas</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >4 estrellas</a></li>
+          <li><a class="text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out" >3 estrellas</a></li>
+          <!-- agregar más opciones de calificación aquí -->
+        </ul>
+      </li>
+    </ul>
+  </aside>
+}
   
   <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
     @for (articulo of articulos; track articulo.id) {
       @if (articulo.Image != '') {
       <article class="articulo" (mouseover)="imagen_hover[articulo.id] = true" (mouseout)="imagen_hover[articulo.id] = false">
-        <div class="w-full h-72 rounded-t relative">
-            <img (click)="navegar(articulo.id)" [src]="url[articulo.id]" (mouseover)="url[articulo.id] = articulo.Image1" (mouseout)="url[articulo.id] = articulo.Image" alt="Article image" class="object-fill h-full w-full" />
+        <div class="w-full max-h-72 rounded-t relative">
+            @defer () {
+              <img (click)="navegar(articulo.id)" [src]="url[articulo.id]" (mouseover)="url[articulo.id] = articulo.Image1" (mouseout)="url[articulo.id] = articulo.Image" alt="Article image" class="object-cover h-full w-full bg-gray-200" />
+            } @placeholder {
+              <div class="w-full h-full bg-gray-200"></div>
+            }
             @if (!imagen_hover[articulo.id]) {
               <span class="absolute bottom-0 left-0 p-1 text-black bg-white text-sm ml-2"> {{ articulo.Price }} </span>
             }

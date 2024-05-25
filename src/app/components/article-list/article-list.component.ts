@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { articulo } from '../../types/article.type';
 import { ArticleService } from '../../services/article.service';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [CommonModule],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.css',
 })
@@ -17,6 +17,7 @@ export class ArticleListComponent implements OnInit {
   imagen_hover: boolean[] = new Array(445).fill(false);
   url: string[] = new Array(445).fill("");
   private router = inject(Router);
+  aside = false;
 
   ngOnInit(): void {
     this.articleService.getProducts().subscribe({
@@ -33,4 +34,17 @@ export class ArticleListComponent implements OnInit {
   navegar(id: number): void {
     this.router.navigate([`/article/${id}`]);
   }
+
+  ordenarPorPrecio(articulos: articulo[]): articulo[] {
+    return articulos.sort((a, b) => {
+      const precioA = parseFloat(a.Price);
+      const precioB = parseFloat(b.Price);
+      return precioA - precioB;
+    });
+  }
+
+  show_aside() {
+    this.aside = !this.aside;
+  }
+
 }
