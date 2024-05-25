@@ -31,7 +31,6 @@ export class ArticleListComponent implements OnInit {
   }
 
   navegar(id: number): void {
-    console.log("dffsd");
     this.router.navigate([`/article/${id}`]);
   }
 }

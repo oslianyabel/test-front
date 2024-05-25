@@ -15,7 +15,10 @@ export type articulo = {
   Description_title: string;
   Description_content: string;
   Details: string;
-  Care: string;
+  Care: {
+    title: string;
+    content: string[];
+  }
   Color_detail: [
     {
       color: string;

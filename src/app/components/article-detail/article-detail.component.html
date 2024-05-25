@@ -76,7 +76,7 @@
               </svg>
           </button>
           <!-- corazon -->
-          <button class="border-2 py-2 pr-4 ml-2">
+          <button class="border py-2 pr-4 ml-2">
               <svg class="w-6 h-6 text-black ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.75 3 16.25 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
               </svg>
@@ -110,7 +110,12 @@
           <div class="text-green-400 inline">{{star}}</div>
         }
       </div>
-      <button class="text-black bg-white px-4 py-2 border-2 border-black">WRITE A REVIEW</button>
+      <button class="text-black bg-white px-4 py-2 border border-black hover:text-gray-600">
+        WRITE A REVIEW
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+          <path d="M9 18L15 12L9 6" />
+        </svg>
+      </button>
     </div>
   }
 
@@ -127,8 +132,8 @@
         <p class="text-md text-gray-800"> {{article.Description_content}} </p>
       </div>
       
-      <div>
-        <img [src]="article.Image" alt="Imagen">
+      <div class="w-full h-full">
+        <img [src]="article.Image" alt="Imagen" class="object-fill">
       </div>
     </div>
   }
@@ -154,7 +159,12 @@
     </svg>
   </div>
   @if (care) {
-    Care
+    <h1 class="font-bold"> {{ article.Care.title }} </h1>
+    <ul class="grid grid-cols-3 gap-4">
+      @for (item of article.Care.content; track $index) {
+        <li class="mr-10 list-disc"> {{item}} </li>
+      }
+    </ul>
   }
 
 </section>

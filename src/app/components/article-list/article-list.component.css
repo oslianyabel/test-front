@@ -1,0 +1,3 @@
+.articulo {
+    @apply bg-white rounded hover:border hover:border-black pb-10 overflow-hidden;
+}
