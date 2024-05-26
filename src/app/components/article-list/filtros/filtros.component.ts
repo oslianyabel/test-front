@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filtros',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './filtros.component.html',
   styleUrl: './filtros.component.css'
 })
@@ -12,10 +13,15 @@ export class FiltrosComponent {
   category = false;
   promo = false;
   reviews = false;
+  min_price = 0;
+  max_price = 999;
+  stars = 5;
 
-  @Output() price_emitter = new EventEmitter<string>();
+  @Output() price_emitter = new EventEmitter<[number, number]>();
+  @Output() price_emitter_sort = new EventEmitter<string>();
   @Output() category_emitter = new EventEmitter<string>();
   @Output() promo_emitter = new EventEmitter<string>();
-  @Output() reviews_emitter = new EventEmitter<string>();
+  @Output() reviews_emitter = new EventEmitter<number>();
+  @Output() reviews_emitter_sort = new EventEmitter<string>();
 
 }

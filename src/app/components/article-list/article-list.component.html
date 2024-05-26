@@ -15,7 +15,7 @@
   </div>
 
 @if (aside) {
-  <aside class="fixed top-10 right-0 w-64 h-screen bg-white shadow-md p-4 z-10">
+  <aside class="fixed top-0 right-0 w-1/4 h-screen bg-white shadow-md p-4 z-10">
     <div class="flex text-lg font-bold mb-4 justify-between">
       <h2>Filter & Sort</h2>
       <svg class="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -24,7 +24,14 @@
       </svg>
     </div>
 
-    <app-filtros (category_emitter)="category_filter($event)"></app-filtros>
+    <app-filtros 
+    (category_emitter)="category_filter($event)"
+    (price_emitter)="price_filter($event)"
+    (price_emitter_sort)="price_sort($event)"
+    (promo_emitter)="promo_filter($event)"
+    (reviews_emitter)="reviews_filter($event)"
+    (reviews_emitter_sort)="reviews_sort($event)"
+    ></app-filtros>
 
   </aside>
 
@@ -32,12 +39,13 @@
   
   <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
     @for (articulo of articulos; track articulo.id) {
-      @if (articulo.Image != '') {
       <article class="articulo" (mouseover)="imagen_hover[articulo.id] = true" (mouseout)="imagen_hover[articulo.id] = false">
         <div class="w-full max-h-72 rounded-t relative">
             @defer () {
               <img (click)="navegar(articulo.id)" [src]="url[articulo.id]" (mouseover)="url[articulo.id] = articulo.Image1" (mouseout)="url[articulo.id] = articulo.Image" alt="Article image" class="object-cover h-full w-full bg-gray-200" />
             } @placeholder {
+              <div class="w-full h-full bg-gray-200"></div>
+            } @loading {
               <div class="w-full h-full bg-gray-200"></div>
             }
             @if (!imagen_hover[articulo.id]) {
@@ -69,7 +77,6 @@
         </p>
 
       </article>
-      }
     }
     
   </div>

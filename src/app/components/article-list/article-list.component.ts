@@ -16,7 +16,7 @@ export class ArticleListComponent implements OnInit {
   articulos_copy!: articulo[];
   articleService = inject(ArticleService);
   imagen_hover: boolean[] = new Array(445).fill(false);
-  url: string[] = new Array(445).fill("");
+  url: string[] = new Array(445).fill('');
   private router = inject(Router);
   aside = false;
 
@@ -25,7 +25,7 @@ export class ArticleListComponent implements OnInit {
       next: (data) => {
         this.articulos = data;
         this.articulos_copy = data;
-        for (let i = 1; i < this.articulos.length; i++) {
+        for (let i = 0; i < this.articulos.length; i++) {
           this.url[i] = this.articulos[i].Image;
         }
       },
@@ -37,18 +37,68 @@ export class ArticleListComponent implements OnInit {
     this.router.navigate([`/article/${id}`]);
   }
 
-  ordenarPorPrecio(articulos: articulo[]): articulo[] {
-    return articulos.sort((a, b) => {
-      const precioA = parseFloat(a.Price);
-      const precioB = parseFloat(b.Price);
-      return precioA - precioB;
-    });
-  }
-
   category_filter(user_selection: string) {
     this.articulos = this.articulos_copy;
-    if(user_selection != 'all')
-      this.articulos = this.articulos.filter(articulo => articulo.Category == user_selection);
+    if (user_selection != 'all')
+      this.articulos = this.articulos.filter(
+        (articulo) => articulo.Category == user_selection
+      );
+  }
+
+  price_filter(range: number[]) {
+    this.articulos = this.articulos_copy;
+    this.articulos = this.articulos.filter((articulo) =>
+        Number(articulo.Price.replace('$', '')) >= range[0] &&
+        Number(articulo.Price.replace('$', '')) <= range[1]
+    );
+  }
+
+  price_sort(order: string) {
+    if(order == 'menor')
+      this.articulos.sort((a, b) => {
+        const precioA = parseFloat(a.Price.replace('$', ''));
+        const precioB = parseFloat(b.Price.replace('$', ''));
+        return precioA - precioB;
+      });
+    else
+      this.articulos.sort((a, b) => {
+        const precioA = parseFloat(a.Price.replace('$', ''));
+        const precioB = parseFloat(b.Price.replace('$', ''));
+        return precioB - precioA;
+      });
+  }
+
+  promo_filter(promo: string) {
+    if(promo == 'none') {
+      this.articulos = this.articulos_copy;
+      this.articulos = this.articulos.filter((articulo) => 
+        articulo.Promo_apply == '' || articulo.Promo_apply == 'Promo codes will not apply to this product.'
+      );
+    }
+    else {
+      this.articulos = this.articulos_copy;
+      this.articulos = this.articulos.filter((articulo) => articulo.Promo_apply == promo);
+    }
+  }
+
+  reviews_filter(stars: number) {
+    this.articulos = this.articulos_copy;
+    this.articulos = this.articulos.filter((articulo) => articulo.Reviews.rating == stars);
+  }
+
+  reviews_sort(order: string) {
+    if(order == 'top')
+      this.articulos.sort((a, b) => {
+        const reviewsA = a.Reviews.rating;
+        const reviewsB = b.Reviews.rating;
+        return reviewsB - reviewsA;
+      });
+    else
+      this.articulos.sort((a, b) => {
+        const reviewsA = a.Reviews.rating;
+        const reviewsB = b.Reviews.rating;
+        return reviewsA - reviewsB;
+      });
   }
 
 }

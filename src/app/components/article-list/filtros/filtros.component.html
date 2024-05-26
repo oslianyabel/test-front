@@ -1,7 +1,12 @@
 <ul class="list-none mb-4 cursor-pointer">
-  <li class="mb-2">
-    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="price = !price">
-      <p>Price</p>
+
+  <li class="text-black p-4 font-bold" (click)="category_emitter.emit('all')">ALL</li>
+
+  <div class="bg-gray-200 h-px w-full"></div>
+
+  <li class="">
+    <div class="flex justify-between p-4 text-black font-bold" (click)="price = !price">
+      <p>PRICE</p>
       <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
         <path d="M7 10L12 15L17 10Z" fill="#666" />
       </svg>
@@ -9,18 +14,32 @@
 
     @if (price) {
     <ul class="list-none pl-4 mb-4">
-      <li><a class="text-gray-600 hover:text-gray-900">Highest to lowest</a></li>
-      <li><a class="text-gray-600 hover:text-gray-900">Minor to Major</a></li>
-      <li><a class="text-gray-600 hover:text-gray-900">Menos de $10</a></li>
-      <li><a class="text-gray-600 hover:text-gray-900">$10-$20</a></li>
-      <li><a class="text-gray-600 hover:text-gray-900">$20-$50</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900 p-4" (click)="price_emitter_sort.emit('mayor')">Higher price</a></li>
+      <li><a class="text-gray-600 hover:text-gray-900 p-4" (click)="price_emitter_sort.emit('menor')">Lower price</a></li>
+      <div class="flex flex-wrap my-4">
+        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price-min">
+            Min
+          </label>
+          <input class="price_in" id="price-min" type="number" min="0" step="0.01" [(ngModel)] = "min_price" (input)="price_emitter.emit([min_price, max_price])" />
+        </div>
+
+        <div class="w-full md:w-1/2 px-3">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price-max">
+            Max
+          </label>
+          <input class="price_in" id="price-max" type="number" min="0" step="0.01" [(ngModel)] = "max_price" (input)="price_emitter.emit([min_price, max_price])" />
+        </div>
+      </div>
     </ul>
     }
   </li>
 
-  <li class="mb-2">
-    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="category = !category">
-        <a>Category</a>
+  <div class="bg-gray-200 h-px w-full"></div>
+
+  <li class="">
+    <div class="flex justify-between text-black font-bold p-4" (click)="category = !category">
+        <a>CATEGORY</a>
         <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
             <path d="M7 10L12 15L17 10Z" fill="#666" />
         </svg>
@@ -28,19 +47,20 @@
 
     @if (category) {
         <ul class="list-none pl-4 mb-4">
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('all')">All</li>
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Women\'s Originals')">Women's Originals</li>
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Men\'s Originals')">Men's Originals</li>
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Infant & Toddler Originals')">Infant & Toddler Originals</li>
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Originals')">Originals</li>
-          <li class="text-gray-600 hover:text-gray-900" (click)="category_emitter.emit('Youth Originals')">Youth Originals</li>
+          <li class="text-gray-600 hover:text-gray-900 p-2" (click)="category_emitter.emit('Women\'s Originals')">Women's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900 p-2" (click)="category_emitter.emit('Men\'s Originals')">Men's Originals</li>
+          <li class="text-gray-600 hover:text-gray-900 p-2" (click)="category_emitter.emit('Infant & Toddler Originals')">Infant & Toddler Originals</li>
+          <li class="text-gray-600 hover:text-gray-900 p-2" (click)="category_emitter.emit('Originals')">Originals</li>
+          <li class="text-gray-600 hover:text-gray-900 p-2" (click)="category_emitter.emit('Youth Originals')">Youth Originals</li>
         </ul>
     }
   </li>
 
-  <li class="mb-2">
-    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="promo = !promo">
-        <a>Promo</a>
+  <div class="bg-gray-200 h-px w-full"></div>
+
+  <li class="">
+    <div class="flex justify-between text-black font-bold p-4" (click)="promo = !promo">
+        <a>PROMO</a>
         <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
             <path d="M7 10L12 15L17 10Z" fill="#666" />
         </svg>
@@ -48,15 +68,17 @@
 
     @if (promo) {
         <ul class="list-none pl-4 mb-4">
-            <li><a class="text-gray-600 hover:text-gray-900 text-sm">save 30% with code REFRESH</a></li>
-            <li><a class="text-gray-600 hover:text-gray-900">None</a></li>
+            <li class="p-2"><a class="text-gray-600 hover:text-gray-900 text-sm" (click)="promo_emitter.emit('Save 30% when you buy any two eligible shoe and clothing items with code REFRESH.')">save 30% with code REFRESH</a></li>
+            <li class="p-2"><a class="text-gray-600 hover:text-gray-900" (click)="promo_emitter.emit('none')">None</a></li>
         </ul>
     }
   </li>
 
-  <li class="mb-2">
-    <div class="flex justify-between text-gray-600 hover:text-gray-900 cursor-pointer" (click)="reviews = !reviews">
-        <a>Reviews</a>
+  <div class="bg-gray-200 h-px w-full"></div>
+
+  <li class="">
+    <div class="flex justify-between text-black font-bold p-4" (click)="reviews = !reviews">
+        <a>REVIEWS</a>
         <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
             <path d="M7 10L12 15L17 10Z" fill="#666" />
         </svg>
@@ -64,9 +86,12 @@
 
     @if (reviews) {
         <ul class="list-none pl-4 mb-4">
-            <li><a class="text-gray-600 hover:text-gray-900">5 estrellas</a></li>
-            <li><a class="text-gray-600 hover:text-gray-900">4 estrellas</a></li>
-            <li><a class="text-gray-600 hover:text-gray-900">3 estrellas</a></li>
+            <li class="p-2"><a class="text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('top')">TOP RATING</a></li>
+            <li class="p-2"><a class="text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('worse')">WORSE RATING</a></li>
+            <div class="mt-4">
+              <label for="stars">Stars</label>
+              <input type="number" id="stars" (input)="reviews_emitter.emit(stars)" [(ngModel)]="stars" class="outline-none pl-2 ml-2 border">
+            </div>
         </ul>
     }
   </li>
