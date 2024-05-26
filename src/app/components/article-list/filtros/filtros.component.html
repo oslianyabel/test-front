@@ -1,15 +1,17 @@
 <ul class="list-none mb-4 cursor-pointer">
 
-  <li class="text-black p-4 font-bold" (click)="category_emitter.emit('all')">ALL</li>
+  <li class="text-black p-4 font-bold" (click)="category_emitter.emit('all')">CLEAR ALL</li>
 
   <div class="bg-gray-200 h-px w-full"></div>
 
   <li class="">
     <div class="flex justify-between p-4 text-black font-bold" (click)="price = !price">
       <p>PRICE</p>
-      <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
-        <path d="M7 10L12 15L17 10Z" fill="#666" />
-      </svg>
+      @if (!price) {
+        <i class="fas fa-arrow-down"></i>
+      } @else {
+        <i class="fas fa-arrow-up"></i>
+      }
     </div>
 
     @if (price) {
@@ -40,9 +42,11 @@
   <li class="">
     <div class="flex justify-between text-black font-bold p-4" (click)="category = !category">
         <a>CATEGORY</a>
-        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
-            <path d="M7 10L12 15L17 10Z" fill="#666" />
-        </svg>
+        @if (!category) {
+          <i class="fas fa-arrow-down"></i>
+        } @else {
+          <i class="fas fa-arrow-up"></i>
+        }
     </div>
 
     @if (category) {
@@ -61,9 +65,11 @@
   <li class="">
     <div class="flex justify-between text-black font-bold p-4" (click)="promo = !promo">
         <a>PROMO</a>
-        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
-            <path d="M7 10L12 15L17 10Z" fill="#666" />
-        </svg>
+        @if (!promo) {
+          <i class="fas fa-arrow-down"></i>
+        } @else {
+          <i class="fas fa-arrow-up"></i>
+        }
     </div>
 
     @if (promo) {
@@ -79,16 +85,18 @@
   <li class="">
     <div class="flex justify-between text-black font-bold p-4" (click)="reviews = !reviews">
         <a>REVIEWS</a>
-        <svg viewBox="0 0 24 24" width="24" height="24" class="text-xl inline ml-4">
-            <path d="M7 10L12 15L17 10Z" fill="#666" />
-        </svg>
+        @if (!reviews) {
+          <i class="fas fa-arrow-down"></i>
+        } @else {
+          <i class="fas fa-arrow-up"></i>
+        }
     </div>
 
     @if (reviews) {
         <ul class="list-none pl-4 mb-4">
 
-            <li class="p-2 text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('top')">TOP RATING</li>
-            <li class="p-2 text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('worse')">WORSE RATING</li>
+            <li class="p-2 text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('top')">Top Rating</li>
+            <li class="p-2 text-gray-600 hover:text-gray-900" (click)="reviews_emitter_sort.emit('worse')">Worse Rating</li>
             
             <div class="flex flex-wrap my-4">
               <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ElementRef, AfterViewInit, ViewChild, viewChild } from '@angular/core';
+import { Component, OnInit, inject, ElementRef, ViewChild, PlatformRef} from '@angular/core';
 import { articulo } from '../../types/article.type';
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
@@ -47,6 +47,8 @@ export class ArticleListComponent implements OnInit {
       this.articulos = this.articulos.filter(
         (articulo) => articulo.Category == user_selection
       );
+
+    this.aside_active = false
   }
 
   price_filter(range: number[]) {
@@ -70,6 +72,8 @@ export class ArticleListComponent implements OnInit {
         const precioB = parseFloat(b.Price.replace('$', ''));
         return precioB - precioA;
       });
+
+    this.aside_active = false
   }
 
   promo_filter(promo: string) {
@@ -83,6 +87,8 @@ export class ArticleListComponent implements OnInit {
       this.articulos = this.articulos_copy;
       this.articulos = this.articulos.filter((articulo) => articulo.Promo_apply == promo);
     }
+
+    this.aside_active = false
   }
 
   reviews_filter(stars: [number, number]) {
@@ -98,6 +104,8 @@ export class ArticleListComponent implements OnInit {
       this.articulos.sort((a, b) => b.Reviews.rating - a.Reviews.rating);
     else
       this.articulos.sort((a, b) => a.Reviews.rating - b.Reviews.rating);
+
+    this.aside_active = false
   }
 
   onWheel(event: WheelEvent) {
@@ -113,6 +121,10 @@ export class ArticleListComponent implements OnInit {
   cerrar_aside(event: MouseEvent) {
     if(!this.btn.nativeElement.contains(event.target) && !this.aside.nativeElement.contains(event.target))
       this.aside_active = false;
+  }
+
+  scrollToTop(): void {
+    this.elementRef.nativeElement.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
 }
