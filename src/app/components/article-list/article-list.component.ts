@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ElementRef } from '@angular/core';
+import { Component, OnInit, inject, ElementRef, AfterViewInit, ViewChild, viewChild } from '@angular/core';
 import { articulo } from '../../types/article.type';
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
@@ -18,9 +18,11 @@ export class ArticleListComponent implements OnInit {
   imagen_hover: boolean[] = new Array(445).fill(false);
   url: string[] = new Array(445).fill('');
   private router = inject(Router);
-  aside = false;
+  aside_active = false;
+  @ViewChild('aside') aside!: ElementRef;
+  @ViewChild('filter_btn') btn!: ElementRef;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
     this.articleService.getProducts().subscribe({
@@ -106,6 +108,11 @@ export class ArticleListComponent implements OnInit {
       event.preventDefault();
       asideElement.scrollTop += event.deltaY;
     }
+  }
+
+  cerrar_aside(event: MouseEvent) {
+    if(!this.btn.nativeElement.contains(event.target) && !this.aside.nativeElement.contains(event.target))
+      this.aside_active = false;
   }
 
 }

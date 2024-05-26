@@ -11,7 +11,6 @@ export class ArticleService {
   http = inject(HttpClient);
 
   constructor() {
-    console.log("Servicio activo");
   }
 
   getProducts(): Observable<articulo[]> {
