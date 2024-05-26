@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ElementRef } from '@angular/core';
 import { articulo } from '../../types/article.type';
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
@@ -19,6 +19,8 @@ export class ArticleListComponent implements OnInit {
   url: string[] = new Array(445).fill('');
   private router = inject(Router);
   aside = false;
+
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.articleService.getProducts().subscribe({
@@ -94,6 +96,16 @@ export class ArticleListComponent implements OnInit {
       this.articulos.sort((a, b) => b.Reviews.rating - a.Reviews.rating);
     else
       this.articulos.sort((a, b) => a.Reviews.rating - b.Reviews.rating);
+  }
+
+  onWheel(event: WheelEvent) {
+    const asideElement = this.elementRef.nativeElement.querySelector('aside');
+    const isAsideScrollable = asideElement.scrollHeight > asideElement.offsetHeight;
+
+    if (isAsideScrollable && event.deltaY!== 0) {
+      event.preventDefault();
+      asideElement.scrollTop += event.deltaY;
+    }
   }
 
 }
