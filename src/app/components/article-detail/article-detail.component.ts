@@ -31,26 +31,26 @@ export class ArticleDetailComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.articleService.getProducts().subscribe({
       next: (data) => {
-        this.article = data[this.id - 1];
+        this.article = data[this.id];
         this.image = this.article.Image;
         this.image1 = this.article.Image1;
         this.color1 = this.article.Color_detail[0].image_url;
         this.color2 = this.article.Color_detail[1].image_url;
         this.rating = Math.round(this.article.Reviews.rating);
-        this.stars = this.getStars(this.rating);
+        this.stars = this.getStars();
       },
       error: (error) => console.log(error),
     });
   }
 
-  getStars(rating: number): string[] {
+  getStars(): string[] {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
+      if (i <= this.rating) 
         stars.push('★');
-      } else {
+      else 
         stars.push('☆');
-      }
+      
     }
     return stars;
   }

@@ -81,24 +81,19 @@ export class ArticleListComponent implements OnInit {
     }
   }
 
-  reviews_filter(stars: number) {
+  reviews_filter(stars: [number, number]) {
     this.articulos = this.articulos_copy;
-    this.articulos = this.articulos.filter((articulo) => articulo.Reviews.rating == stars);
+    this.articulos = this.articulos.filter((articulo) => 
+      articulo.Reviews.rating >= stars[0] &&
+      articulo.Reviews.rating <= stars[1]
+    );
   }
 
   reviews_sort(order: string) {
     if(order == 'top')
-      this.articulos.sort((a, b) => {
-        const reviewsA = a.Reviews.rating;
-        const reviewsB = b.Reviews.rating;
-        return reviewsB - reviewsA;
-      });
+      this.articulos.sort((a, b) => b.Reviews.rating - a.Reviews.rating);
     else
-      this.articulos.sort((a, b) => {
-        const reviewsA = a.Reviews.rating;
-        const reviewsB = b.Reviews.rating;
-        return reviewsA - reviewsB;
-      });
+      this.articulos.sort((a, b) => a.Reviews.rating - b.Reviews.rating);
   }
 
 }

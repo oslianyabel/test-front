@@ -15,13 +15,14 @@ export class FiltrosComponent {
   reviews = false;
   min_price = 0;
   max_price = 999;
-  stars = 5;
+  min_stars!: number;
+  max_stars!: number;
 
   @Output() price_emitter = new EventEmitter<[number, number]>();
   @Output() price_emitter_sort = new EventEmitter<string>();
   @Output() category_emitter = new EventEmitter<string>();
   @Output() promo_emitter = new EventEmitter<string>();
-  @Output() reviews_emitter = new EventEmitter<number>();
+  @Output() reviews_emitter = new EventEmitter<[number, number]>();
   @Output() reviews_emitter_sort = new EventEmitter<string>();
 
 }

@@ -2,10 +2,10 @@ const fs = require("fs");
 const path = require("path");
 
 // Ruta del archivo JSON externo
-const inputJsonPath = "./DatosScraping(sin id).json";
+const inputJsonPath = "./DatosScraping(originals).json";
 
 // Ruta del archivo JSON de salida
-const outputJsonPath = "./output.json";
+const outputJsonPath = "./DatosScraping.json";
 
 // Leer el archivo JSON externo
 fs.readFile(inputJsonPath, (err, data) => {
@@ -18,7 +18,7 @@ fs.readFile(inputJsonPath, (err, data) => {
   const jsonData = JSON.parse(data);
 
   // Filtrar los objetos con Image vacía
-  const filteredJsonData = jsonData.filter((item) => item.Image !== "");
+  const filteredJsonData = jsonData.filter((item) => item.Image !== "" && item.Reviews !== '');
   for (let i = 0; i < filteredJsonData.length; i++) {
     filteredJsonData[i]['id'] = i;
   }
